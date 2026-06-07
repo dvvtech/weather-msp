@@ -1,28 +1,40 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.5.11801.241 oobstable
+VisualStudioVersion = 18.5.11801.241
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMSP.Api", "src\WeatherMSP.Api\WeatherMSP.Api.csproj", "{CF085F93-52DC-4E1D-9D61-CA270DFAE180}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMsp.Server", "src\WeatherMsp.Server\WeatherMsp.Server.csproj", "{441F34C6-7E8F-46A2-A043-67F5DF207162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF085F93-52DC-4E1D-9D61-CA270DFAE180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF085F93-52DC-4E1D-9D61-CA270DFAE180}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF085F93-52DC-4E1D-9D61-CA270DFAE180}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF085F93-52DC-4E1D-9D61-CA270DFAE180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|x64.Build.0 = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Debug|x86.Build.0 = Debug|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|x64.ActiveCfg = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|x64.Build.0 = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|x86.ActiveCfg = Release|Any CPU
+		{441F34C6-7E8F-46A2-A043-67F5DF207162}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CF085F93-52DC-4E1D-9D61-CA270DFAE180} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{441F34C6-7E8F-46A2-A043-67F5DF207162} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80254728-5294-4899-9BA0-5386058A9FD4}
