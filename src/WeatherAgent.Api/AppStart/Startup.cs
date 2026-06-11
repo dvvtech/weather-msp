@@ -38,6 +38,7 @@ namespace WeatherAgent.Api.AppStart
 
         private void ConfigureServices()
         {
+            _builder.Services.AddSingleton<ChatHistoryTrimmer>();
             _builder.Services.AddSingleton<AiAgentService>();
             _builder.Services.AddSingleton<SessionManager>();
             _builder.Services.AddHostedService(sp => sp.GetRequiredService<SessionManager>());

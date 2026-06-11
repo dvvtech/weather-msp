@@ -13,6 +13,7 @@ namespace WeatherAgent.Api.Services
 {
     public sealed class AiAgentService : IAsyncDisposable
     {
+        private readonly ChatHistoryTrimmer _trimmer;
         private readonly ILogger<AiAgentService> _logger;
         private readonly SemaphoreSlim _initLock = new(1, 1);
 
@@ -27,10 +28,12 @@ namespace WeatherAgent.Api.Services
         public AiAgentService(
             IOptions<AiConfig> aiConfig,
             IOptions<ProxyConfig> proxyConfig,
+            ChatHistoryTrimmer trimmer,
             ILogger<AiAgentService> logger)
         {
             _aiConfig = aiConfig.Value;
             _proxyConfig = proxyConfig.Value;
+            _trimmer = trimmer;
             _logger = logger;
         }
 
@@ -128,6 +131,8 @@ namespace WeatherAgent.Api.Services
             foreach (var tool in _tools!)
                 options.Tools.Add(tool);
 
+            _trimmer.Trim(history);
+
             for (int round = 0; round < _aiConfig.MaxToolRounds; round++)
             {
                 _logger.LogInformation("Round {Round}", round + 1);
@@ -135,6 +140,7 @@ namespace WeatherAgent.Api.Services
                 ChatCompletion response;
                 try
                 {
+                    _trimmer.Trim(history);
                     var completion = await _chatClient!.CompleteChatAsync(history, options, ct);
                     response = completion.Value;
                 }
