@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using WeatherMsp.Server.Configuration;
 using WeatherMsp.Server.Services;
 
@@ -39,8 +40,15 @@ builder.Services
 var app = builder.Build();
 
 // Проверка работоспособности.
-app.MapGet("/", () => Results.Text(
-    "Weather MCP Server is running. MCP endpoint: /mcp", "text/plain"));
+app.MapGet("/", () =>
+{
+    var opts = app.Services.GetRequiredService<IOptions<OpenWeatherMapOptions>>().Value;
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("OpenWeatherMap ApiKey: {ApiKey}",
+        string.IsNullOrWhiteSpace(opts.ApiKey) ? "(not set)" : opts.ApiKey);
+    return Results.Text(
+        "Weather MCP Server is running. MCP endpoint: /mcp", "text/plain");
+});
 
 // MCP endpoint доступен по адресу /mcp (Streamable HTTP) и /mcp/sse (legacy SSE).
 app.MapMcp("/mcp");
