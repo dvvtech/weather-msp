@@ -42,10 +42,10 @@ var app = builder.Build();
 // Проверка работоспособности.
 app.MapGet("/", () =>
 {
-    var opts = app.Services.GetRequiredService<IOptions<OpenWeatherMapOptions>>().Value;
-    var logger = app.Services.GetRequiredService<ILogger<Program>>();
-    logger.LogInformation("OpenWeatherMap ApiKey: {ApiKey}",
-        string.IsNullOrWhiteSpace(opts.ApiKey) ? "(not set)" : opts.ApiKey);
+    //var opts = app.Services.GetRequiredService<IOptions<OpenWeatherMapOptions>>().Value;
+    //var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    //logger.LogInformation("OpenWeatherMap ApiKey: {ApiKey}",
+    //    string.IsNullOrWhiteSpace(opts.ApiKey) ? "(not set)" : opts.ApiKey);
     return Results.Text(
         "Weather MCP Server is running. MCP endpoint: /mcp", "text/plain");
 });
