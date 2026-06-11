@@ -108,7 +108,7 @@ namespace WeatherAgent.Api.Controllers
 
             return sessionId;
         }
-        
+
         [HttpGet("test")]
         public ActionResult<string> Test()
         {
@@ -116,3 +116,4 @@ namespace WeatherAgent.Api.Controllers
             return Ok("1278");
         }
     }
+}
