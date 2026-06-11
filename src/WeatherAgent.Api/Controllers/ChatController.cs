@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Channels;
 using WeatherAgent.Api.Models;
 using WeatherAgent.Api.Services;
@@ -45,11 +47,16 @@ namespace WeatherAgent.Api.Controllers
             await session.Lock.WaitAsync(ct);
             var processingTask = ProcessWithReleaseAsync(session, request.Message, channel.Writer, ct);
 
+            var jsonOptions = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            };
+
             try
             {
                 await foreach (var evt in channel.Reader.ReadAllAsync(ct))
                 {
-                    var json = JsonSerializer.Serialize(new { type = evt.Type, data = evt.Data });
+                    var json = JsonSerializer.Serialize(new { type = evt.Type, data = evt.Data }, jsonOptions);
                     await Response.WriteAsync($"data: {json}\n\n", ct);
                     await Response.Body.FlushAsync(ct);
                 }
@@ -78,7 +85,7 @@ namespace WeatherAgent.Api.Controllers
                 try
                 {
                     await writer.WriteAsync(new SseEvent("error",
-                        JsonSerializer.Serialize(new { message = ex.Message })), ct);
+                        new { message = ex.Message }), ct);
                 }
                 catch { /* channel might be closed */ }
             }

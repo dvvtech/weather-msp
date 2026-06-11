@@ -142,7 +142,7 @@ namespace WeatherAgent.Api.Services
                 {
                     _logger.LogError(ex, "OpenAI API error in round {Round}", round + 1);
                     await writer.WriteAsync(new SseEvent("error",
-                        JsonSerializer.Serialize(new { message = ex.Message })), ct);
+                        new { message = ex.Message }), ct);
                     return;
                 }
 
@@ -152,7 +152,7 @@ namespace WeatherAgent.Api.Services
                 {
                     var text = response.Content[0].Text;
                     await writer.WriteAsync(new SseEvent("final_answer",
-                        JsonSerializer.Serialize(new { text })), ct);
+                        new { text }), ct);
                     return;
                 }
 
@@ -166,7 +166,7 @@ namespace WeatherAgent.Api.Services
                     }).ToArray()
                 };
                 await writer.WriteAsync(new SseEvent("assistant_message",
-                    JsonSerializer.Serialize(assistantData)), ct);
+                    assistantData), ct);
 
                 foreach (var toolCall in response.ToolCalls)
                 {
@@ -176,7 +176,7 @@ namespace WeatherAgent.Api.Services
             }
 
             await writer.WriteAsync(new SseEvent("error",
-                JsonSerializer.Serialize(new { message = "Превышен лимит вызовов инструментов" })), ct);
+                new { message = "Превышен лимит вызовов инструментов" }), ct);
         }
 
         private async Task<string> ExecuteToolAsync(ChatToolCall toolCall, CancellationToken ct)
