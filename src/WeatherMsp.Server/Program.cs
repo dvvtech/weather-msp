@@ -1,10 +1,15 @@
 using WeatherMsp.Server.Configuration;
 using WeatherMsp.Server.Services;
-using WeatherMsp.Server.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Конфигурация OpenWeatherMap ---
+
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddKeyPerFile("/run/secrets", optional: true);
+}
+
 builder.Services
     .AddOptions<OpenWeatherMapOptions>()
     .Bind(builder.Configuration.GetSection(OpenWeatherMapOptions.SectionName))
